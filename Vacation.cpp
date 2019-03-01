@@ -23,6 +23,7 @@ int main(){
         }
     }
 
+    int ans = 0;
     vector<vector<int> > dp;
     dp = vector<vector<int> >(N + 1, vector<int>(3, 0));
 
@@ -31,17 +32,21 @@ int main(){
             for(int k = 0; k < 3; k++){
                 if(!(k == j)) dp[i][j] = max(dp[i][j], dp[i - 1][k] + T[i][j]);
             }
+            if(ans < dp[i][j]){
+                ans = dp[i][j];
+            }
         }
     }
 
-    
+    /*
     for(int i = 0; i <= N; i++){
         for(int j = 0;  j < 3; j++){
             cout << dp[i][j] << " ";
         }
         cout << endl;
     }
-
-    cout << dp[N][2] << endl;
+    */
+    
+    cout << ans << endl;
 
 }
