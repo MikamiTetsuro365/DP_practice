@@ -11,6 +11,8 @@ int N = 0;
 int K = 0;
 vector<int > h;
 
+//何がだめなのか全くわからん
+
 int main(){
     
     cin >> N;
@@ -24,28 +26,27 @@ int main(){
         h.push_back(t);
     }
     
-    vector<int > cost(N, 11451419);
+    vector<int > cost(N + 1, 114514);
+
+    //cout << cost.size() << endl;
 
     //初期化的な
     cost[0] = 0;
     cost[1] = 0;
 
     for(int i = 1; i <= N; i++){
-        cout << h[i] << endl;
+        //cout << h[i] << endl;
         for(int j = 1; j <= K; j++){
             if(i - j >= 1){
                 //cout << abs(h[i]-h[i-j]) << endl;
                 
                 cost[i] = min(cost[i], cost[i-j] + abs(h[i]-h[i-j]));
-                cout << cost[i] << " " ;
+                //cout << cost[i] << " " ;
 
-            }else{
-                break;
             }
-        
         }
         
-        cout << "::" << cost[i] << endl;
+        //cout << "::" << cost[i] << endl;
 
     }
 
