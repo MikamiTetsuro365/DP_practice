@@ -11,7 +11,6 @@ typedef long long ll;
 int N = 0;
 int W = 0;
 
-
 int main(){
     //ナップサック問題　荷物の価値を最大化
     cin >> N;
@@ -29,7 +28,7 @@ int main(){
             cin >> T[i][j];
         }
     }
-    
+
     //dp
     vector<vector<ll> > dp;
     dp = vector<vector<ll> >(N + 1, vector<ll>(W + 1, -1));
