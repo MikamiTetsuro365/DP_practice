@@ -26,7 +26,7 @@ int main(){
         h.push_back(t);
     }
     
-    vector<int > cost(N + 1, 114514);
+    vector<int > cost(N + 1, 1145141919);
 
     //cout << cost.size() << endl;
 
