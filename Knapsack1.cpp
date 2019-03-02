@@ -10,7 +10,6 @@ typedef long long ll;
 
 int N = 0;
 int W = 0;
-int K = 0;
 
 
 int main(){
@@ -25,7 +24,7 @@ int main(){
     T[0][0] = 0;
     T[0][1] = 0;
 
-    for(int i = 1; i < N + 1; i++){
+    for(int i = 1; i <= N; i++){
         for(int j = 0;  j < 2; j++){
             cin >> T[i][j];
         }
@@ -39,17 +38,15 @@ int main(){
     //答え
     ll ans = 0;
 
-    for(int i = 1; i < N + 1; i++){
-        for(int j = 0; j < W + 1; j++){
+    for(int i = 1; i <= N; i++){
+        for(int j = 0; j <= W; j++){
             if(dp[i - 1][j] > -1){
                 //直下を更新
                 if(dp[i][j] <= dp[i - 1][j]){
                     dp[i][j] = dp[i - 1][j];
-                } 
-                //荷物が入らない
-                if(j + T[i][0] > W) break;
+                }
                 //荷物を足し合わせたところを更新
-                if(dp[i][j + T[i][0]] <= dp[i - 1][j] + T[i][1]){
+                if(dp[i][j + T[i][0]] <= dp[i - 1][j] + T[i][1] && j + T[i][0] <= W){
                     dp[i][j + T[i][0]] = dp[i - 1][j] + T[i][1];
                     //ans確認
                     if(ans < dp[i - 1][j] + T[i][1]) ans = dp[i - 1][j] + T[i][1];
@@ -63,12 +60,13 @@ int main(){
 
     //確認
     /*
-    for(int i = 1; i < N + 1; i++){
+    for(int i = 0; i < N + 1; i++){
         for(int j = 0; j < W + 1; j++){
             cout << dp[i][j] << " ";
         }
         cout << endl;
     }
     */
+    
 
 }
