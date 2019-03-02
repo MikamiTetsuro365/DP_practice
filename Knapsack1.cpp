@@ -36,6 +36,9 @@ int main(){
     dp = vector<vector<ll> >(N + 1, vector<ll>(W + 1, -1));
     dp[0][0] = 0;
 
+    //答え
+    ll ans = 0;
+
     for(int i = 1; i < N + 1; i++){
         for(int j = 0; j < W + 1; j++){
             if(dp[i - 1][j] > -1){
@@ -48,18 +51,24 @@ int main(){
                 //荷物を足し合わせたところを更新
                 if(dp[i][j + T[i][0]] <= dp[i - 1][j] + T[i][1]){
                     dp[i][j + T[i][0]] = dp[i - 1][j] + T[i][1];
-                    cout << dp[i - 1][j] << " ";
-                } 
+                    //ans確認
+                    if(ans < dp[i - 1][j] + T[i][1]) ans = dp[i - 1][j] + T[i][1];
+                }
             }          
         }
-        cout << endl;
+
     }
 
+    cout << ans << endl;
+
+    //確認
+    /*
     for(int i = 1; i < N + 1; i++){
         for(int j = 0; j < W + 1; j++){
             cout << dp[i][j] << " ";
         }
         cout << endl;
     }
+    */
 
 }
