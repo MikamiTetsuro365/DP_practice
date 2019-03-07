@@ -37,7 +37,7 @@ int main(){
 
     //dp　Value　価値を基準に表を作る
     vector<vector<ll> > dp;
-    dp = vector<vector<ll> >(N + 1, vector<ll>(max_value + 1, -1));
+    dp = vector<vector<ll> >(N + 1, vector<ll>(max_value + 1, 1145141919));
     dp[0][0] = 0;
 
     //答え
