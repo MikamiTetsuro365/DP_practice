@@ -32,7 +32,7 @@ int main(){
 
     //価値が大きい順にソート 
     sort(T.rbegin(), T.rend());
-    //余白
+    //前に余白
     T.insert(T.begin(), make_pair(0, 0));
 
     //dp　Value　価値を基準に表を作る
@@ -43,11 +43,13 @@ int main(){
     //答え
     ll ans = 0;
 
+    //縦：個数　横：価値　価値を達成する最小の重さで更新していく
+
     for(int i = 1; i <= N; i++){
         for(int j = 0; j <= max_value; j++){
-            if(dp[i - 1][j] > -1){
+            if(dp[i - 1][j] < 1145141919){
                 //直下を更新
-                if(dp[i][j] <= dp[i - 1][j]){
+                if(dp[i][j] >= dp[i - 1][j]){
                     dp[i][j] = dp[i - 1][j];
                 }
                 //荷物を足し合わせたところを更新
@@ -65,12 +67,12 @@ int main(){
 
     //確認
     
-    
+    /*
     for(int i = 0; i <= N; i++){
         for(int j = 0; j <= max_value; j++){
             cout << dp[i][j] << " ";
         }
         cout << endl;
     }
-    
+    */
 }
