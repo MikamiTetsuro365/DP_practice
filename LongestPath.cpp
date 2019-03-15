@@ -5,57 +5,67 @@
 #include <string>
 #include <cmath>
 
-
 using namespace std;
 typedef long long ll;
 
-int N = 0;
-int M = 0;
+ll N;
+ll M;
+vector<vector<ll> > G;
+vector<ll > dp;
+
+ll dfs(ll n){
+
+    if(dp[n] > 0){
+        return dp[n];
+    }
+
+    ll mx = 0;
+    //cout << n << " " ;
+    for(ll i = 0; i < G[n].size(); i++){
+        mx = max(mx, dfs(G[n][i]) + 1);
+        //cout << n << "," << i << endl;
+        //if(G[n][i] == 1){
+        //    mx = max(mx, dfs(i) + 1);
+        //}      
+    }
+    //cout << endl;
+    dp[n] = mx;
+    return dp[n];
+}
 
 int main(){
-    //ナップサック問題　荷物の価値を最大化
+
     cin >> N;
     cin >> M;
 
-    vector<vector<ll> > G;
-    G = vector<vector<ll> >(N + 1, vector<ll>(N + 1, 0));
+    G = vector<vector<ll> >(N);
+    dp = vector<ll > (N , 0);
 
-    int x, y = 0;
-    for(int i = 0; i < M; i++){
-        cin >> x;
-        cin >> y;
-        G[x][y] = 1;
-
+    ll x = 0, y = 0;
+    for(ll i = 0; i < M; i++){
+        cin >> x >> y;
+        G[x-1].push_back(y-1);
+        //G[x - 1][y - 1] = 1;
     }
 
     //確認
-    for(int i = 0; i <= N; i++){
-        for(int j = 0; j <= N; j++){
+    /*
+    for(ll i = 0; i < N; i++){
+        for(ll j = 0; j < N; j++){
             cout << G[i][j] << " ";
         }
         cout << endl;
-    }   
-    cout << endl; 
+    }
+    */
 
-    vector<vector<ll> > dp;
-    dp = vector<vector<ll> >(N + 1, vector<ll>(N + 1, 0));
-
-    for(int i = 1; i <= N; i++){
-        for(int j = 1; j <= N; j++){
-            if(G[i - 1][j] > 0){
-                dp[j][i] += G[i][j];
-            }else{
-                dp[i][j] = dp[i][j];
-            }
+    ll ans = 0;
+    for(ll i = 0; i < N; i++){
+        //cout << "ウェイ" <<  "," << i << endl;
+        if(dp[i] == 0){
+            ans = max(ans, dfs(i));
         }
     }
 
-    //確認
-    for(int i = 0; i <= N; i++){
-        for(int j = 0; j <= N; j++){
-            cout << dp[i][j] << " ";
-        }
-        cout << endl;
-    }
+    cout << ans << endl;
 
 }
